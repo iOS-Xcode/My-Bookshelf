@@ -20,7 +20,7 @@ class BookInfoTableViewCell: UITableViewCell {
     
     private let name: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .gray
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.text = "Custom CEll"
         return label
@@ -28,7 +28,7 @@ class BookInfoTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .orange
+        contentView.backgroundColor = .white
         contentView.addSubview(bookImageView)
         contentView.addSubview(name)
     }
