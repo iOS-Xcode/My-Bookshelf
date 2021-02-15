@@ -15,6 +15,7 @@
 		B97B6B8025DAED0700972895 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B97B6B7E25DAED0700972895 /* LaunchScreen.storyboard */; };
 		B97B6B8B25DAED0700972895 /* My_BookshelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6B8A25DAED0700972895 /* My_BookshelfTests.swift */; };
 		B97B6B9625DAED0700972895 /* My_BookshelfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6B9525DAED0700972895 /* My_BookshelfUITests.swift */; };
+		B97B6BA725DAEFE400972895 /* BookInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6BA625DAEFE400972895 /* BookInfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B97B6B9125DAED0700972895 /* My BookshelfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My BookshelfUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B97B6B9525DAED0700972895 /* My_BookshelfUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_BookshelfUITests.swift; sourceTree = "<group>"; };
 		B97B6B9725DAED0700972895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B97B6BA625DAEFE400972895 /* BookInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				B97B6B7C25DAED0700972895 /* Assets.xcassets */,
 				B97B6B7E25DAED0700972895 /* LaunchScreen.storyboard */,
 				B97B6B8125DAED0700972895 /* Info.plist */,
+				B97B6BA625DAEFE400972895 /* BookInfoTableViewCell.swift */,
 			);
 			path = "My Bookshelf";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97B6BA725DAEFE400972895 /* BookInfoTableViewCell.swift in Sources */,
 				B97B6B7825DAED0500972895 /* ViewController.swift in Sources */,
 				B97B6B7425DAED0500972895 /* AppDelegate.swift in Sources */,
 				B97B6B7625DAED0500972895 /* SceneDelegate.swift in Sources */,
