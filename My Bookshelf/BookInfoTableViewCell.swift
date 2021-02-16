@@ -21,8 +21,10 @@ class BookInfoTableViewCell: UITableViewCell {
     private let name: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.text = "Custom CEll"
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -50,9 +52,9 @@ class BookInfoTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print(contentView.bounds.midY)
+        print(contentView.frame.maxX)
         let imageSize = contentView.frame.size.height - 50
         bookImageView.frame = CGRect(x: 10, y: contentView.bounds.midY / 2, width: imageSize, height: imageSize)
-        name.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: 10, width: 100, height: 30)
+        name.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: 10, width: contentView.frame.maxX - 80, height: 50)
     }
 }

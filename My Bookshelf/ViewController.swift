@@ -9,6 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var booksList = [BookInfo]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+            }
+        }
+    }
+    
     let searchBar = UISearchBar()
     
     private let tableView: UITableView = {
@@ -84,14 +93,16 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return booksList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookInfoTableViewCell.identifier, for: indexPath) as? BookInfoTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(text: "custom + \(indexPath.row+1)", imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
+        let bookInfo = booksList[indexPath.row]
+//        cell.configure(text: "custom + \(indexPath.row+1)", imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
+        cell.configure(text: bookInfo.title, imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
         return cell
     }
     
@@ -114,8 +125,19 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchText \(searchText)")
+        guard let searchBarText = searchBar.text else {return}
+        let bookRequest = RequestBookInfo(searchString: searchBarText)
+        bookRequest.fetchBookInfo {[weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let bookInfo):
+                self?.booksList = bookInfo
+            }
+        }
+
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         search(shouldShow: false)
     }
