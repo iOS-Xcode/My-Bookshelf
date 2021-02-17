@@ -22,6 +22,9 @@ class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(BookInfoTableViewCell.self, forCellReuseIdentifier: BookInfoTableViewCell.identifier)
+        /*
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+ */
         return tableView
     }()
     
@@ -42,6 +45,17 @@ class SearchViewController: UIViewController {
 //MARK: - setupUI
 
     func setupUI() {
+        
+        //TableView
+        /*
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+        ])
+ */
+        //Search Bar
         view.backgroundColor = .white
         searchBar.sizeToFit()
         searchBar.delegate = self
@@ -65,7 +79,7 @@ class SearchViewController: UIViewController {
     
     }
 
-//MARK: - Handle and set searchBar
+//MARK: - Set searchBar and handle
 
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {

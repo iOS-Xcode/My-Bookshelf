@@ -14,13 +14,15 @@ class BookInfoTableViewCell: UITableViewCell {
         let imageView = BookImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-        
+    
     private let title: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
@@ -54,6 +56,30 @@ class BookInfoTableViewCell: UITableViewCell {
         contentView.addSubview(title)
         contentView.addSubview(isbn)
         contentView.addSubview(price)
+        
+        //bookImageView
+        bookImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        bookImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        bookImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        bookImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        
+        //title
+        title.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        title.leftAnchor.constraint(equalTo: bookImageView.rightAnchor).isActive = true
+        title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        
+        //isbn
+        isbn.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        isbn.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
+        isbn.leftAnchor.constraint(equalTo: bookImageView.rightAnchor).isActive = true
+        isbn.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        
+        //price
+        price.heightAnchor.constraint(equalToConstant: 14).isActive = true
+        price.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+        price.leftAnchor.constraint(equalTo: bookImageView.rightAnchor).isActive = true
+        price.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -75,13 +101,15 @@ class BookInfoTableViewCell: UITableViewCell {
         price.text = nil
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //print(contentView.bounds.midY, contentView.frame.midY)
-        let imageSize = contentView.frame.size.height - 20
-        bookImageView.frame = CGRect(x: 10, y: 10, width: imageSize, height: imageSize)
-        title.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.minY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 40)
-        isbn.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: title.bounds.maxY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-        price.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.maxY - 30, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-    }
+    /*
+     override func layoutSubviews() {
+     super.layoutSubviews()
+     //print(contentView.bounds.midY, contentView.frame.midY)
+     let imageSize = contentView.frame.size.height - 20
+     bookImageView.frame = CGRect(x: 10, y: 10, width: imageSize, height: imageSize)
+     title.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.minY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 40)
+     isbn.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: title.bounds.maxY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
+     price.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.maxY - 30, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
+     }
+     */
 }
