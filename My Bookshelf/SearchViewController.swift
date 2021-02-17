@@ -7,18 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     var booksList = [BookInfo]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                
             }
         }
     }
     
-    let searchBar = UISearchBar()
+    var searchBar = UISearchBar()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -71,7 +70,6 @@ class ViewController: UIViewController {
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
-
         } else {
             navigationItem.rightBarButtonItem = nil
         }
@@ -91,7 +89,7 @@ class ViewController: UIViewController {
 
 //MARK: - UITableView Delegate
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return booksList.count
     }
@@ -102,7 +100,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let bookInfo = booksList[indexPath.row]
 //        cell.configure(text: "custom + \(indexPath.row+1)", imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
-        cell.configure(text: bookInfo.title, imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
+        //let bookTempImage = BookImageView()
+        if let url = URL(string: bookInfo.image) {
+ //           bookTempImage.loadImage(from: url)
+            cell.bookImageView.loadImage(from: url)
+        }
+        cell.configure(title: bookInfo.title, isbn: bookInfo.isbn13, price: bookInfo.price)
+        
         return cell
     }
     
@@ -114,7 +118,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: - UISearchBar Delegate
 
-extension ViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("searchBarTextDidBeginEditing")
@@ -135,7 +139,6 @@ extension ViewController: UISearchBarDelegate {
                 self?.booksList = bookInfo
             }
         }
-
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

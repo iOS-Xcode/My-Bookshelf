@@ -14,16 +14,20 @@ enum BookInfoError:Error {
 
 struct RequestBookInfo {
     let resourceURL : URL
-    
+
     init(searchString: String) {
-        let resourceString = "https://api.itbook.store/1.0/search/\(searchString)"
-        print(resourceString)
-        guard let resourceURL = URL(string: resourceString) else {
+ 
+        let resourceString : String = "https://api.itbook.store/1.0/search/\(searchString)/2"
+        
+        //Allow to non-english characters
+        guard let stringurlfixed = resourceString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let resourceURL = URL(string: stringurlfixed)
+        else {
+            print(resourceString)
             fatalError()
         }
         self.resourceURL = resourceURL
     }
-    
+
     func fetchBookInfo(completion: @escaping(Result<[BookInfo], BookInfoError>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
             guard let jsonData = data else {

@@ -19,5 +19,8 @@ struct BookInfo: Decodable {
 }
 
 struct BookInfoResponse: Decodable {
+    var total : String
+    var page : String
+    var error : String
     var books: [BookInfo]
 }
