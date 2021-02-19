@@ -8,7 +8,7 @@
 import UIKit
 
 class BookInfoTableViewCell: UITableViewCell {
-    static let identifier = "BookInfoTableViewCell"
+    static let identifier = "BookInfoTableViewIdentifier"
     
     public let bookImageView: BookImageView = {
         let imageView = BookImageView()
@@ -44,6 +44,7 @@ class BookInfoTableViewCell: UITableViewCell {
         label.textColor = .gray
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.numberOfLines = 0
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byWordWrapping
         return label
@@ -86,7 +87,7 @@ class BookInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(title: String, isbn: String, price: String) {
+    public func configure(title: String, isbn: String?, price: String) {
         self.title.text = title
         //bookImageView.image = imageName.image
         self.isbn.text = isbn

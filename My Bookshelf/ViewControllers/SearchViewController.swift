@@ -22,9 +22,6 @@ class SearchViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(BookInfoTableViewCell.self, forCellReuseIdentifier: BookInfoTableViewCell.identifier)
-        /*
-        tableView.translatesAutoresizingMaskIntoConstraints = false
- */
         return tableView
     }()
     
@@ -113,8 +110,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let bookInfo = booksList[indexPath.row]
-//        cell.configure(text: "custom + \(indexPath.row+1)", imageName: indexPath.row % 2 == 0 ? "book" : "noImage")
-        //let bookTempImage = BookImageView()
         if let url = URL(string: bookInfo.image) {
  //           bookTempImage.loadImage(from: url)
             cell.bookImageView.loadImage(from: url)
@@ -126,6 +121,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailBookViewController = DetailBookViewController()
+        guard let isbn13 = booksList[indexPath.row].isbn13 else {
+            return
+        }
+
+        detailBookViewController.isbn = isbn13
+        navigationController?.pushViewController(detailBookViewController, animated: true)
     }
     
 }
