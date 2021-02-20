@@ -16,8 +16,9 @@ enum BookInfoError:Error {
 struct RequestBookInfo {
     var resourceURL : URL? = nil
     //List of books
-    init(searchString: String) {
-        let bookSearchString : String = "https://api.itbook.store/1.0/search/\(searchString)/2"
+    init(searchString: String, currentPage : Int) {
+        let bookSearchString : String = "https://api.itbook.store/1.0/search/\(searchString)/\(currentPage)"
+        print(bookSearchString)
         self.resourceURL = convertUrl(bookSearchString)
         
     }
@@ -39,7 +40,7 @@ struct RequestBookInfo {
         return resourceURL
     }
         //self.resourceURL = resourceURL
-    func fetchBookInfo(completion: @escaping(Result<[BookInfo], BookInfoError>) -> Void) {
+    func fetchBookInfo(completion: @escaping(Result<([BookInfo], String, String), BookInfoError>) -> Void) {
         let dataTask = URLSession.shared.dataTask(with: resourceURL!) { data, _, _ in
             guard let jsonData = data else {
                 completion(.failure(.noDataAvailable))
@@ -49,7 +50,9 @@ struct RequestBookInfo {
                 let decoder = JSONDecoder()
                 let bookInfoResponse = try decoder.decode(BookInfoResponse.self, from: jsonData)
                 let bookDetails = bookInfoResponse.books
-                completion(.success(bookDetails))
+                let total = bookInfoResponse.total
+                let currentPage = bookInfoResponse.page
+                completion(.success((bookDetails, total, currentPage)))
             } catch {
                 completion(.failure(.canNotProcessData))
             }
@@ -76,22 +79,3 @@ struct RequestBookInfo {
     }
     
 }
-/*
-class CustomTapGestureRecognizer: UITapGestureRecognizer {
-    var ourCustomValue: String? {
-        didSet {
-            urlTapped(UITapGestureRecognizer)
-        }
-    }
-    
-    //must to be modified in the futer
-    @objc func urlTapped(_ sender: UITapGestureRecognizer) {
-        //UIApplication.shared.open(sender.text, options: [:], completionHandler: nil)
-        guard let url = ourCustomValue else {
-            print("The url is nil")
-            return
-        }
-        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-    }
-}
-*/

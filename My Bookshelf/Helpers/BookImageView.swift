@@ -29,7 +29,7 @@ class BookImageView: UIImageView {
         
         task  = URLSession.shared.dataTask(with: url) { (data, responds, error) in
             guard let data = data, let newImage = UIImage(data: data) else {
-                print("Could not load image from url : \(url)")
+                //print("Could not load image from url : \(url)")
                 return
             }
             

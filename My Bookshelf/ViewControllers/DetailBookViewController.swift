@@ -77,6 +77,8 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
             if let url = URL(string: bookDetail.image ?? "") {
                 cell.bookImageView.loadImage(from: url)
             }
+            //      cell.configure(with: viewModel.moderator(at: indexPath.row))
+
             //language: String, pages: String, year: String
             cell.configure(title: bookDetail.title ?? "", subtitle: bookDetail.subtitle ?? "", publisher: bookDetail.publisher ?? "", authors: bookDetail.authors ?? "", language: bookDetail.language ?? "", pages: bookDetail.pages ?? "", year: bookDetail.year ?? "")
             
@@ -85,7 +87,7 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookPriceDescTableViewCell.identifier, for: indexPath) as? BookPriceDescTableViewCell else {
                 return UITableViewCell()
             }
-            
+
             cell.configure(isbn10: bookDetail.isbn10 ?? "", isbn13: bookDetail.isbn13 ?? "", price: bookDetail.price ?? "", rating: bookDetail.rating ?? "", url: bookDetail.url ?? "", desc: bookDetail.desc ?? "")
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(didTapUrlLable(_:)))
@@ -146,5 +148,4 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.present(alert, animated: true)
     }
-    
 }
