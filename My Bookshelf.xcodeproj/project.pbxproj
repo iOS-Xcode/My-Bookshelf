@@ -22,11 +22,11 @@
 		B97B6BA725DAEFE400972895 /* BookInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6BA625DAEFE400972895 /* BookInfoTableViewCell.swift */; };
 		B97B6BC625DB4E0400972895 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6BC525DB4E0400972895 /* BookInfo.swift */; };
 		B97B6BCE25DB51D000972895 /* RequestBookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6BCD25DB51D000972895 /* RequestBookInfo.swift */; };
-		B9A8985525E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.34 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985025E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.34 AM.png */; };
-		B9A8985625E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.08 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985125E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.08 AM.png */; };
-		B9A8985725E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.17 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985225E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.17 AM.png */; };
-		B9A8985825E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.54.55 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985325E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.54.55 AM.png */; };
-		B9A8985925E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.10 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985425E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.10 AM.png */; };
+		B9A8985525E4457A008F2A9C /* ScreenShot5.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985025E4457A008F2A9C /* ScreenShot5.png */; };
+		B9A8985625E4457A008F2A9C /* ScreenShot2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985125E4457A008F2A9C /* ScreenShot2.png */; };
+		B9A8985725E4457A008F2A9C /* ScreenShot3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985225E4457A008F2A9C /* ScreenShot3.png */; };
+		B9A8985825E4457A008F2A9C /* ScreenShot1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985325E4457A008F2A9C /* ScreenShot1.png */; };
+		B9A8985925E4457A008F2A9C /* ScreenShot4.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A8985425E4457A008F2A9C /* ScreenShot4.png */; };
 		B9E1627A25E370D400CD87F1 /* My_BookshelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97B6B8A25DAED0700972895 /* My_BookshelfTests.swift */; };
 		B9EC858A25E0B5CF002BFA19 /* BooksListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EC858925E0B5CF002BFA19 /* BooksListViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -71,11 +71,11 @@
 		B97B6BA625DAEFE400972895 /* BookInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoTableViewCell.swift; sourceTree = "<group>"; };
 		B97B6BC525DB4E0400972895 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		B97B6BCD25DB51D000972895 /* RequestBookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBookInfo.swift; sourceTree = "<group>"; };
-		B9A8985025E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.34 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2021-02-22 at 11.56.34 AM.png"; sourceTree = "<group>"; };
-		B9A8985125E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.08 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2021-02-22 at 11.55.08 AM.png"; sourceTree = "<group>"; };
-		B9A8985225E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.17 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2021-02-22 at 11.55.17 AM.png"; sourceTree = "<group>"; };
-		B9A8985325E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.54.55 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2021-02-22 at 11.54.55 AM.png"; sourceTree = "<group>"; };
-		B9A8985425E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.10 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2021-02-22 at 11.56.10 AM.png"; sourceTree = "<group>"; };
+		B9A8985025E4457A008F2A9C /* ScreenShot5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot5.png; sourceTree = "<group>"; };
+		B9A8985125E4457A008F2A9C /* ScreenShot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot2.png; sourceTree = "<group>"; };
+		B9A8985225E4457A008F2A9C /* ScreenShot3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot3.png; sourceTree = "<group>"; };
+		B9A8985325E4457A008F2A9C /* ScreenShot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot1.png; sourceTree = "<group>"; };
+		B9A8985425E4457A008F2A9C /* ScreenShot4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot4.png; sourceTree = "<group>"; };
 		B9EC858925E0B5CF002BFA19 /* BooksListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,11 +217,11 @@
 		B9A8984F25E44558008F2A9C /* ScreenShots */ = {
 			isa = PBXGroup;
 			children = (
-				B9A8985325E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.54.55 AM.png */,
-				B9A8985125E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.08 AM.png */,
-				B9A8985225E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.17 AM.png */,
-				B9A8985425E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.10 AM.png */,
-				B9A8985025E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.34 AM.png */,
+				B9A8985325E4457A008F2A9C /* ScreenShot1.png */,
+				B9A8985125E4457A008F2A9C /* ScreenShot2.png */,
+				B9A8985225E4457A008F2A9C /* ScreenShot3.png */,
+				B9A8985425E4457A008F2A9C /* ScreenShot4.png */,
+				B9A8985025E4457A008F2A9C /* ScreenShot5.png */,
 			);
 			path = ScreenShots;
 			sourceTree = "<group>";
@@ -331,11 +331,11 @@
 			files = (
 				B97B6B8025DAED0700972895 /* LaunchScreen.storyboard in Resources */,
 				B97B6B7D25DAED0700972895 /* Assets.xcassets in Resources */,
-				B9A8985625E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.08 AM.png in Resources */,
-				B9A8985825E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.54.55 AM.png in Resources */,
-				B9A8985725E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.55.17 AM.png in Resources */,
-				B9A8985525E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.34 AM.png in Resources */,
-				B9A8985925E4457A008F2A9C /* Screen Shot 2021-02-22 at 11.56.10 AM.png in Resources */,
+				B9A8985625E4457A008F2A9C /* ScreenShot2.png in Resources */,
+				B9A8985825E4457A008F2A9C /* ScreenShot1.png in Resources */,
+				B9A8985725E4457A008F2A9C /* ScreenShot3.png in Resources */,
+				B9A8985525E4457A008F2A9C /* ScreenShot5.png in Resources */,
+				B9A8985925E4457A008F2A9C /* ScreenShot4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
