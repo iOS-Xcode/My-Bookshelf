@@ -78,7 +78,7 @@ class BookInfoTableViewCell: UITableViewCell {
         
         //price
         price.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        price.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+        price.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         price.leftAnchor.constraint(equalTo: bookImageView.rightAnchor).isActive = true
         price.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
     }
@@ -89,28 +89,14 @@ class BookInfoTableViewCell: UITableViewCell {
     
     public func configure(_ bookInfo : BookInfo) {
         self.title.text = bookInfo.title
-        //bookImageView.image = imageName.image
         self.isbn.text = bookInfo.isbn13
         self.price.text = bookInfo.price
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //bookImageView.image = nil
         title.text = nil
         isbn.text = nil
         price.text = nil
     }
-    
-    /*
-     override func layoutSubviews() {
-     super.layoutSubviews()
-     //print(contentView.bounds.midY, contentView.frame.midY)
-     let imageSize = contentView.frame.size.height - 20
-     bookImageView.frame = CGRect(x: 10, y: 10, width: imageSize, height: imageSize)
-     title.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.minY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 40)
-     isbn.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: title.bounds.maxY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-     price.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.maxY - 30, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-     }
-     */
 }

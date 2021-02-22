@@ -108,25 +108,25 @@ class BookPriceDescTableViewCell: UITableViewCell {
         
         //isbn10
         isbn10.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        isbn10.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        isbn10.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         isbn10.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         //publisher.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
         //isbn13
         isbn13.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        isbn13.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        isbn13.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         isbn13.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         //authors.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
         //price
         price.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        price.topAnchor.constraint(equalTo: isbn10.bottomAnchor, constant: 10).isActive = true
+        price.topAnchor.constraint(equalTo: isbn10.bottomAnchor, constant: 20).isActive = true
         price.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         //authors.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
         //rating
         rating.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        rating.topAnchor.constraint(equalTo: isbn13.bottomAnchor, constant: 14).isActive = true
+        rating.topAnchor.constraint(equalTo: isbn13.bottomAnchor, constant: 24).isActive = true
         rating.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         //authors.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
@@ -138,7 +138,7 @@ class BookPriceDescTableViewCell: UITableViewCell {
         
         //desc
         desc.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        desc.topAnchor.constraint(equalTo: url.bottomAnchor, constant: 10).isActive = true
+        desc.topAnchor.constraint(equalTo: url.bottomAnchor, constant: 15).isActive = true
         desc.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         desc.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
         
@@ -159,19 +159,15 @@ class BookPriceDescTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    public func configure(isbn10: String, isbn13: String, price: String, rating: String, url: String, desc: String) {
-        self.isbn10.text = "ISBN10 : " + isbn10
-        self.isbn13.text = "ISBN13 : " + isbn13
-        self.price.text = "Price : " + price
-        self.rating.text = "Rating : " + rating + "/5"
-        self.url.text = "URL : " + url
-        self.url.restorationIdentifier = url
-        self.url.isUserInteractionEnabled = true
-        self.desc.text = desc
-    }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    public func configure(_ bookDetail : BookDetail ) {
+        self.isbn10.text = "ISBN10 : " + (bookDetail.isbn10 ?? "")
+        self.isbn13.text = "ISBN13 : " + (bookDetail.isbn13 ?? "")
+        self.price.text = "Price : " + (bookDetail.price ?? "")
+        self.rating.text = "Rating : " + (bookDetail.rating ?? "") + "/5"
+        self.url.text = "URL : " + (bookDetail.url ?? "")
+        self.url.restorationIdentifier = bookDetail.url
+        self.url.isUserInteractionEnabled = true
+        self.desc.text = bookDetail.desc
     }
 }
