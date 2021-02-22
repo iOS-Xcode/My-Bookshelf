@@ -9,20 +9,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var booksList = BooksListViewModel() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    lazy var booksList = BooksListViewModel()
     
-//    var isLoading = false
-//    var totalPages : Int = 0
-//    var allPages : Int = 10
-//    var currentPage : Int = 1
-    var searchText = ""
-    var searchBar = UISearchBar()
+    fileprivate var searchText = ""
+    
+    fileprivate var searchBar = UISearchBar()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -33,26 +24,29 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //tableView.backgroundColor = .lightGray
+        
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.prefetchDataSource = self
+        booksList.delegate = self
+        
         view.addSubview(tableView)
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-
-//MARK: - setupUI
-
+    
+    //MARK: - setupUI
+    
     func setupUI() {
-
+        
         //Search Bar
         view.backgroundColor = .white
         searchBar.sizeToFit()
         searchBar.delegate = self
+        searchBar.returnKeyType = .done
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         
         //Navigation bar title
@@ -60,7 +54,7 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         navigationController?.view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isTranslucent = false
-
+        
         navigationController?.navigationBar.barStyle = .black
         showSearchBarButton(shouldShow: true)
         
@@ -70,11 +64,11 @@ class SearchViewController: UIViewController {
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.darkGray]
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
-    
+        
     }
-
-//MARK: - Set searchBar and handle
-
+    
+    //MARK: - Set searchBar and handle
+    
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
@@ -99,7 +93,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return booksList.bookInfoList.count
+        return booksList.loadedCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,8 +101,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let bookInfo = booksList.bookInfoList[indexPath.row]
+        //Use cache images
         if let url = URL(string: bookInfo.image) {
- //           bookTempImage.loadImage(from: url)
             cell.bookImageView.loadImage(from: url)
         }
         cell.configure(bookInfo)
@@ -125,19 +119,24 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let isbn13 = booksList.bookInfoList[indexPath.row].isbn13 else {
             return
         }
-
         detailBookViewController.isbn = isbn13
         navigationController?.pushViewController(detailBookViewController, animated: true)
     }
     
+    //To show total books and loaded books count
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Total items : \(String(booksList.totalItems.totalBooksCount)), Loaded items :\(String(booksList.loadedCount))"
+    }
+    
+    //LastVisibleIndexPath that the user is scrolling on the end of tableView row
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
         if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last {
+            
             if indexPath == lastVisibleIndexPath {
-                // do here...
-                //requestWithSearchText(searchText)
-                if indexPath.row >= booksList.bookInfoList.count - 1 && booksList.total > 0 {
-//                    booksList.currentPage += 1
-                    requestWithSearchText(searchText)
+                //Last visible indexpath.row
+                if indexPath.row >= booksList.loadedCount - 1 && booksList.total > 0 {
+                    booksList.requestWithSearchText(searchText)
                 }
             }
         }
@@ -148,47 +147,36 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("searchBarTextDidBeginEditing")
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("searchBarTextDidEndEditing")
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchBarText = searchBar.text else { return }
-        self.searchText = searchBarText
-        booksList = BooksListViewModel()
-        requestWithSearchText(searchBarText)
+        if searchBarText.count >= 2 {
+            //Init array and structs
+            booksList.initializeOfSearchedBooksList()
+            self.searchText = searchBarText
+            booksList.requestWithSearchText(searchBarText)
+        } else {
+            booksList.initializeOfSearchedBooksList()
+            tableView.reloadData()
+            
+        }
     }
     
-    func requestWithSearchText(_ searchBarText : String) {
-            let bookRequest = RequestBookInfo(searchString: searchBarText, currentPage: booksList.currentPage)
-            bookRequest.fetchBookInfo {[weak self] result in
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success((let bookInfo, let total, let currentPage)):
-                    self?.booksList.bookInfoList.append(contentsOf: bookInfo)
-                    
-                    guard let total = Int(total), let currentPage = Int(currentPage) else {
-                        return
-                    }
-                    self?.booksList.isFetchInProgress = false
-                    self?.booksList.currentPage = currentPage
-                    print("currentPage",currentPage)
-                    self?.booksList.total = total
-                    print("total",total)
-                    self?.booksList.currentPage += 1
-                    print("booklistcount",self?.booksList.bookInfoList.count)
-                    self?.booksList.currentItems = (self?.booksList.bookInfoList.count)!
-                }
-            }
-        //tableView.reloadData()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
-
+    
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         search(shouldShow: false)
+    }
+}
+
+//MARK: - TableViewReloadDelegate
+
+extension SearchViewController: TableViewReloadDelegate {
+    func tableViewReload() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

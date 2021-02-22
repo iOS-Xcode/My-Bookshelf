@@ -7,6 +7,8 @@
 
 import Foundation
 /*
+ For the DetailBookViewController data model.
+ 
  {
      "error": "0"
      "title": "Securing DevOps"
@@ -42,7 +44,7 @@ struct BookDetail: Decodable {
     var rating : String?
     var desc : String?
     var price : String?
-    var url : String?
-    //var pdf : [String : String]
+    var url : String? //website url
+//    var pdf : [String : String]?
 }
 

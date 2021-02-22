@@ -4,13 +4,18 @@
 //
 //  Created by Seokhyun Kim on 2021-02-17.
 //
-
+/*
+ It has two sections, one of the section has book image, title, subtitle and etc, the other has price, desc, comment button and etc.
+ */
 import UIKit
 
 class DetailBookViewController: UIViewController {
-    
+    //Get informatin of book like keyword
     var isbn : String = ""
     
+    //StarsRating frame
+    lazy var starsRating = RatingStars(frame: CGRect(x: 0, y: 0, width: kStatSize * 4 + (CGFloat(kSpacing) * 5), height: kStatSize))
+
     var bookDetail = BookDetail() {
         didSet {
             DispatchQueue.main.async {
@@ -34,7 +39,6 @@ class DetailBookViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController?.navigationBar.prefersLargeTitles = false
         fetchBookDetail()
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +50,7 @@ class DetailBookViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
+    //Fetch data by isbn numbers
     func fetchBookDetail() {
         let bookRequest = RequestBookInfo(bookDetailString: self.isbn)
         bookRequest.fetchBookDetail {[weak self] result in
@@ -77,10 +82,8 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
             if let url = URL(string: bookDetail.image ?? "") {
                 cell.bookImageView.loadImage(from: url)
             }
-            //      cell.configure(with: viewModel.moderator(at: indexPath.row))
 
-            //language: String, pages: String, year: String
-            cell.configure(title: bookDetail.title ?? "", subtitle: bookDetail.subtitle ?? "", publisher: bookDetail.publisher ?? "", authors: bookDetail.authors ?? "", language: bookDetail.language ?? "", pages: bookDetail.pages ?? "", year: bookDetail.year ?? "")
+            cell.configure(bookDetail)
             
             return cell
         case 1:
@@ -88,8 +91,8 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
 
-            cell.configure(isbn10: bookDetail.isbn10 ?? "", isbn13: bookDetail.isbn13 ?? "", price: bookDetail.price ?? "", rating: bookDetail.rating ?? "", url: bookDetail.url ?? "", desc: bookDetail.desc ?? "")
-            
+            cell.configure(bookDetail)
+
             let tap = UITapGestureRecognizer(target: self, action: #selector(didTapUrlLable(_:)))
             cell.url.addGestureRecognizer(tap)
             
@@ -104,15 +107,15 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 300
+            return 350
         case 1:
-            return 300
+            return 400
         default:
             fatalError()
         }
     }
     
-    //MARK: - Any perform
+    //MARK: - Any performance
     
     @objc func didTapUrlLable(_ sender: UITapGestureRecognizer) {
         
@@ -120,17 +123,17 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
             print("The url is nil")
             return
         }
+        //Open safari by url.
         UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
-    
+    //Show up AlertView
     @objc func didTapCommentButton(_ button : UIButton) {
-        let alert = UIAlertController(title: "Your review", message: nil,
+        let alert = UIAlertController(title: nil, message: "Your review",
                                       preferredStyle: .alert)
         
         alert.view.tintColor = .blue
         alert.view.backgroundColor = .lightGray
         alert.view.layer.cornerRadius = 25
-        
         alert.addTextField { (textField: UITextField) in
             textField.keyboardAppearance = .dark
             textField.keyboardType = .default
@@ -138,9 +141,15 @@ extension DetailBookViewController: UITableViewDataSource, UITableViewDelegate {
             textField.placeholder = "Let me know your experience"
         }
         
+        //For adding AlertView.
+        let tempViewController = UIViewController()
+        tempViewController.view = starsRating
+        alert.setValue(tempViewController, forKey: "contentViewController")
+        alert.view.addSubview(starsRating)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let review = alert.textFields![0]
             self.cellForSection1.comment.text = review.text
+            tempViewController.view = nil
         }))
         
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in

@@ -5,6 +5,9 @@
 //  Created by Seokhyun Kim on 2021-02-16.
 //
 
+/*
+ Using class NSCache to cache image data with spinners on asynchronization.
+ */
 import UIKit
 
 let imageCache = NSCache<AnyObject, AnyObject>()
@@ -29,7 +32,6 @@ class BookImageView: UIImageView {
         
         task  = URLSession.shared.dataTask(with: url) { (data, responds, error) in
             guard let data = data, let newImage = UIImage(data: data) else {
-                //print("Could not load image from url : \(url)")
                 return
             }
             

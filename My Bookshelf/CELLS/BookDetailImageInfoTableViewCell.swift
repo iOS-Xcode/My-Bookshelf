@@ -118,38 +118,38 @@ class BookDetailImageInfoTableViewCell: UITableViewCell {
         title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         
         //subTitle
-        subTitle.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        subTitle.heightAnchor.constraint(equalToConstant: 26).isActive = true
         subTitle.topAnchor.constraint(equalTo: title.bottomAnchor).isActive = true
         subTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         subTitle.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         
         //publisher
         publisher.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        publisher.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 5).isActive = true
+        publisher.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 15).isActive = true
         publisher.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         //publisher.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
         //authors
         authors.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        authors.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 5).isActive = true
+        authors.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 30).isActive = true
         authors.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         //authors.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         
         //language
         language.heightAnchor.constraint(equalToConstant: 13).isActive = true
         //language.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        language.topAnchor.constraint(equalTo: publisher.bottomAnchor, constant: 5).isActive = true
+        language.topAnchor.constraint(equalTo: publisher.bottomAnchor, constant: 25).isActive = true
         language.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         
         //pages
         pages.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        pages.topAnchor.constraint(equalTo: publisher.bottomAnchor, constant: 5).isActive = true
+        pages.topAnchor.constraint(equalTo: publisher.bottomAnchor, constant: 25).isActive = true
         pages.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 //        pages.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         
         //year
         year.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        year.topAnchor.constraint(equalTo: authors.bottomAnchor, constant: 5).isActive = true
+        year.topAnchor.constraint(equalTo: authors.bottomAnchor, constant: 10).isActive = true
         //year.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         year.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
     }
@@ -158,34 +158,14 @@ class BookDetailImageInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(title: String, subtitle: String, publisher: String, authors: String, language: String, pages: String, year: String) {
-        self.title.text = title
-        self.subTitle.text = subtitle
-        self.publisher.text = publisher
-        self.authors.text = authors
-        self.language.text = "Language : " + language
-        self.pages.text = "Pages : " + pages
-        self.year.text = year
+    public func configure(_ bookDetail : BookDetail ) {
+        self.title.text = bookDetail.title
+        self.subTitle.text = bookDetail.subtitle
+        self.publisher.text = bookDetail.publisher
+        self.authors.text = bookDetail.authors
+        self.language.text = "Language : " + (bookDetail.language ?? "")
+        self.pages.text = "Pages : " + (bookDetail.pages ?? "")
+        self.year.text = bookDetail.year
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        title.text = nil
-        subTitle.text = nil
-        publisher.text = nil
-        authors.text = nil
-    }
-    
-    /*
-     override func layoutSubviews() {
-     super.layoutSubviews()
-     //print(contentView.bounds.midY, contentView.frame.midY)
-     let imageSize = contentView.frame.size.height - 20
-     bookImageView.frame = CGRect(x: 10, y: 10, width: imageSize, height: imageSize)
-     title.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.minY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 40)
-     isbn.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: title.bounds.maxY + 10, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-     price.frame = CGRect(x: 20 + bookImageView.frame.size.width, y: contentView.bounds.maxY - 30, width: contentView.frame.maxX - bookImageView.frame.width - 30, height: 20)
-     }
-     */
 }
 
